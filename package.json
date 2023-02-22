@@ -1,0 +1,24 @@
+{
+  "name": "chat-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon Backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iam-souvik/Chat-Application.git"
+  },
+  "author": "Souvik Patra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iam-souvik/Chat-Application/issues"
+  },
+  "homepage": "https://github.com/iam-souvik/Chat-Application#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
