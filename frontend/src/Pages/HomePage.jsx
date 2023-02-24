@@ -24,10 +24,11 @@ const HomePage = () => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
 
 
-    if (user) navigate("/chats");
+    if (user){
+      navigate("/chats");
+    } 
      
-    
-    
+  
   }, [navigate]);
 
   return (

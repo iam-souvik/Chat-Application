@@ -17,12 +17,17 @@
   },
   "homepage": "https://github.com/iam-souvik/Chat-Application#readme",
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.17",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.10.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "react-lottie": "^1.2.3",
+    "react-notification-badge": "^1.5.1",
+    "react-scrollable-feed": "^1.3.2",
+    "socket.io-client": "^4.6.1"
   }
 }
