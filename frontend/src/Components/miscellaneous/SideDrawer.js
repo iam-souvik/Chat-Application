@@ -195,10 +195,11 @@ function SideDrawer() {
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
           <DrawerBody>
-            <Box d="flex" pb={2}>
+            <Box d="flex" pb={5} >
               <Input
-                placeholder="Search by name or email"
-                mr={2}
+                placeholder="Search by name /email"
+                mr={5}
+                maxWidth="195px"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />

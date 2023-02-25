@@ -3,6 +3,29 @@ const generateToken = require("../config/generateToken");
 
 const User = require("../models/userModel")
 
+
+
+//@description     Get or Search all users
+//@route           GET /api/user?search=
+//@access          Public
+const allUsers = asyncHandeler(async (req, res) => {
+  const keyword = req.query.search
+    ? {
+        $or: [
+          { name: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
+        ],
+      }
+    : {};
+
+  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  res.send(users);
+});
+
+//@description     Register new user
+//@route           POST /api/user/
+//@access          Public
+
 const RegisterUsers = asyncHandeler(async (req, res) => {
 
     const { name, email, password, pic } = req.body;
@@ -62,5 +85,5 @@ if(usercheck && (await usercheck.matchPassword(password))){
 
 
 
-module.exports = { RegisterUsers,LoginUser }
+module.exports = {allUsers, RegisterUsers,LoginUser }
 

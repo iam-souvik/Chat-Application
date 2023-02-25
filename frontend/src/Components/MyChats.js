@@ -10,6 +10,7 @@ import { Button } from "@chakra-ui/react";
 import { ChatState } from "../Context/ChatProvider";
 
 const MyChats = ({ fetchAgain }) => {
+
   const [loggedUser, setLoggedUser] = useState();
 
   const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
@@ -26,6 +27,7 @@ const MyChats = ({ fetchAgain }) => {
       };
 
       const { data } = await axios.get("/api/chat", config);
+      console.log("Chat data",data);
       setChats(data);
     } catch (error) {
       toast({
