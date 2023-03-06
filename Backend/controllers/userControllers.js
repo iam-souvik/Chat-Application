@@ -9,17 +9,19 @@ const User = require("../models/userModel")
 //@route           GET /api/user?search=
 //@access          Public
 const allUsers = asyncHandeler(async (req, res) => {
-  const keyword = req.query.search
-    ? {
-        $or: [
-          { name: { $regex: req.query.search, $options: "i" } },
-          { email: { $regex: req.query.search, $options: "i" } },
-        ],
-      }
-    : {};
 
-  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
-  res.send(users);
+    const keyword = req.query.search
+        ? {
+            $or: [
+                { name: { $regex: req.query.search, $options: "i" } },
+                { email: { $regex: req.query.search, $options: "i" } },
+            ],
+        }
+        : {};
+    console.log(keyword);
+
+    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+    res.send(users);
 });
 
 //@description     Register new user
@@ -36,23 +38,23 @@ const RegisterUsers = asyncHandeler(async (req, res) => {
     }
     const FindUser = await User.findOne({ email })
 
-    if(FindUser){
+    if (FindUser) {
         res.status(400)
         throw new Error("User Already Exists")
     }
 
-    const CreateUser = await User.create({name,email,password,pic})
+    const CreateUser = await User.create({ name, email, password, pic })
 
-    if(CreateUser){
+    if (CreateUser) {
         res.status(201).json({
-            _id:CreateUser._id,
-            name:CreateUser.name,
-            email:CreateUser.email,
-            password:CreateUser.password,
-            pic:CreateUser.pic,
-            token:generateToken(CreateUser._id)
+            _id: CreateUser._id,
+            name: CreateUser.name,
+            email: CreateUser.email,
+            password: CreateUser.password,
+            pic: CreateUser.pic,
+            token: generateToken(CreateUser._id)
         })
-    }else{
+    } else {
         res.status(400)
         throw new Error("Fail to Create User")
     }
@@ -60,30 +62,30 @@ const RegisterUsers = asyncHandeler(async (req, res) => {
 })
 
 
-const LoginUser = asyncHandeler ( async (req,res) => {
-    const {password,email} = req.body
+const LoginUser = asyncHandeler(async (req, res) => {
+    const { password, email } = req.body
 
-const usercheck = await User.findOne({email})
+    const usercheck = await User.findOne({ email })
 
-if(usercheck && (await usercheck.matchPassword(password))){
-    res.json({
-        _id:usercheck._id,
-        name:usercheck.name,
-        email:usercheck.email,
-        password:usercheck.password,
-        pic:usercheck.pic,
-        token:generateToken(usercheck._id)
-    })
-    
-}else{
-    res.status(400)
+    if (usercheck && (await usercheck.matchPassword(password))) {
+        res.json({
+            _id: usercheck._id,
+            name: usercheck.name,
+            email: usercheck.email,
+            password: usercheck.password,
+            pic: usercheck.pic,
+            token: generateToken(usercheck._id)
+        })
+
+    } else {
+        res.status(400)
         throw new Error("Invalid Email Or password")
-}
+    }
 
 })
 
 
 
 
-module.exports = {allUsers, RegisterUsers,LoginUser }
+module.exports = { allUsers, RegisterUsers, LoginUser }
 

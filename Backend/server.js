@@ -2,11 +2,12 @@ const express = require("express")
 const dotenv =  require("dotenv")
 // const {chats} = require("./data/data")
 const ConnectDB = require("./config/db")
+const cors = require("cors")
 const  userRoutes  = require("./route/userRoutes")
 const chatRoutes = require("./route/chatRoutes")
 const messageRoutes = require("./route/messageRoutes")
 
-const { notFound, errorHandler } = require("./middleware/errorMiddleware")
+// const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 const path = require("path");
 
 
@@ -15,6 +16,7 @@ const path = require("path");
 dotenv.config()
 ConnectDB()
 const app = express()
+app.use(cors())
 
 app.use(express.json())   // accept json data
 
@@ -55,8 +57,8 @@ if (process.env.NODE_ENV === "production") {
 
 // Error Handling middlewares
 
-app.use(notFound)       // This two are errorhandelar this is aptanal  You can use For finding error Easily
-app.use(errorHandler)
+// app.use(notFound)       // This two are errorhandelar this is aptanal  You can use For finding error Easily
+// app.use(errorHandler)
 
 
 // app.get("/api/chat",(req,res)=>{
